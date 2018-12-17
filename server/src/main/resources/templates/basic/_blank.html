@@ -1,0 +1,74 @@
+﻿<#include "/basic/_meta.html"/>
+<title>空白页</title>
+</head>
+<body>
+<#include "/basic/_header.html"/>
+<#include "/basic/_menu.html"/>
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+        <span class="c-gray en">&gt;</span> 端口列表
+        <a class="btn btn-primary radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
+            <i class="Hui-iconfont">&#xe68f;</i>
+        </a>
+    </nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <div class="cl pd-5 bg-1 bk-gray">
+                <span class="l">
+                    <a href="javascript:;" onclick="member_add('添加用户','add.html','','400')" class="btn btn-primary radius">
+                        <i class="icon-plus"></i> 添加端口</a>
+                </span>
+                <span class="text-r">
+                    <form>
+                        <input type="text" class="input-text" style="width:250px" placeholder="输入端口" id="" name="keyWord" value="${keyWord!}">
+                        <button type="submit" class="btn btn-primary" id="" name=""><i class="icon-search"></i> 搜索</button>
+                    </form>
+                </span>
+            </div>
+            <div class="mt-20">
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead>
+                    <tr class="text-c">
+                        <th>序号</th>
+                        <th>端口号</th>
+                        <th>端口类型</th>
+                        <th>远程主机</th>
+                        <th>远程端口</th>
+                        <th>备注</th>
+                        <th>所属用户</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-c">
+                    <#list data as port>
+                    <tr>
+                        <td>${port_index+1}</td>
+                        <td>${port.port}</td>
+                        <td><#if port.proxyType == 1>HTTP<#else>TCP</#if></td>
+                        <td>${port.remoteHost!''}</td>
+                        <td>${port.remotePort!''}</td>
+                        <td>${port.remark!''}</td>
+                        <td>${port.remark!''}</td>
+                        <td>${port.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                        <td class="td-manage">
+                            <a style="text-decoration:none" class="ml-5" onclick="change_password('修改密码','password.html','10001','600','270')" href="javascript:;" title="修改密码">
+                                <i class="Hui-iconfont"></i>
+                            </a>
+                            <a title="删除" href="javascript:;" onclick="member_del(this,${port.id})" class="ml-5" style="text-decoration:none">
+                                <i class="Hui-iconfont"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+                    </#list>
+                    </tbody>
+                </table>
+                <div id="pageNav" class="pageNav"></div>
+            </div>
+        </article>
+    </div>
+</section>
+<#include "/basic/_footer.html"/>
+</body>
+</html>

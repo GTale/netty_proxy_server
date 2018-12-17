@@ -1,0 +1,82 @@
+<#include "/basic/_meta.html"/>
+
+<title>添加用户</title>
+</head>
+<body>
+<article class="page-container">
+    <form action="" method="post" class="form form-horizontal" id="form-member-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>密码：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="password" name="password">
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+<#include "/basic/_footer.html"/>
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="${path}/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="${path}/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="${path}/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#form-member-add").validate({
+            rules: {
+                username: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 16
+                },
+                password: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 16
+                }
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                var data = {
+                    "username": $("input[id='username']").val(),
+                    "password": $("input[id='password']").val()
+                };
+                $.ajax({
+                    url: "add",
+                    method:"post",
+                    data: JSON.stringify(data),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (data) {
+                       if(data.code === 1000){
+                           setTimeout(function(){
+                               window.parent.location.reload();
+                               var index = parent.layer.getFrameIndex(window.name);
+                               parent.layer.close(index);
+                           },1000)
+                           layer.msg(data.message, {icon: 1, time: 800});
+                       }else{
+                           layer.msg(data.message, {icon: 2, time: 1000})
+                       }
+                    }
+                });
+            }
+        });
+    });
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

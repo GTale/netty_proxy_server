@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.phantom.netty.server.mapper.MainMapper">
+
+    <select id="findUserByUsername" resultType="com.phantom.netty.server.entity.UserInfo">
+        select *
+        from t_user
+        where username = #{username} and is_del = 0
+    </select>
+
+    <select id="findUserById" resultType="com.phantom.netty.server.entity.UserInfo">
+        select *
+        from t_user
+        where id = #{userId}
+    </select>
+
+    <select id="getUserList" resultType="com.phantom.netty.server.entity.UserInfo">
+        select *
+        from t_user
+        where is_del = 0
+        <if test="keyWord != null and keyWord != ''">
+            and username like '%'||#{keyWord}||'%'
+        </if>
+    </select>
+
+    <select id="getPortList" resultType="com.phantom.netty.server.entity.Port">
+        select *,b.username
+        from t_port as a
+        left join t_user as b
+        on a.user_id = b.id
+        where 1=1 and a.is_del = 0 and b.is_del = 0
+        <if test="userId != null">
+            and user_id = #{userId}
+        </if>
+        <if test="port != null and port != ''">
+            and port like '%'||#{port}||'%'
+        </if>
+    </select>
+
+    <select id="findPortById" resultType="com.phantom.netty.server.entity.Port">
+        select *
+        from t_port
+        where id = #{portId}
+        <if test="userId != null">
+            and user_id = #{userId}
+        </if>
+    </select>
+
+    <select id="getPortSettingList" resultType="com.phantom.netty.server.entity.PortSetting">
+        select *
+        from t_port_ban_setting
+        where is_del = 0
+    </select>
+
+    <select id="findPortSettingById" resultType="com.phantom.netty.server.entity.PortSetting">
+        select *
+        from t_port_ban_setting
+        where id = #{id} and is_del = 0
+    </select>
+
+    <select id="queryPortIsBan" resultType="java.lang.Boolean">
+        select count(*) > 0
+        from t_port_ban_setting
+        where start_port &lt;= #{port} and end_port &gt;= #{port}
+    </select>
+
+    <insert id="saveUser">
+        insert into t_user values(
+          #{id},#{userToken},#{username},#{password},#{isAdmin},#{isDel}
+        )
+    </insert>
+
+    <insert id="savePort">
+        insert into t_port values(
+          #{id},#{portToken},#{userId},#{port},#{proxyType},#{remotePort},#{remoteHost},#{remark},#{isDel},#{createTime},#{updateTime}
+        )
+    </insert>
+
+    <insert id="savePortSetting">
+        insert into t_port_ban_setting values (
+          #{id},#{startPort},#{endPort},#{remark},#{isDel},#{createTime},#{updateTime}
+        )
+    </insert>
+
+    <update id="delUser">
+        update t_user
+        set is_del = 1
+        where id = #{userId}
+    </update>
+
+    <update id="changePassword">
+        update t_user
+        set password = #{password}
+        where id = #{userId}
+    </update>
+
+    <update id="updatePortSetting">
+        update t_port_ban_setting
+        set start_port = #{startPort},end_port = #{endPort},update_time = #{updateTime},remark = #{remark}
+        where id = #{id}
+    </update>
+
+    <update id="updatePort">
+        update t_port
+        set port = #{port},proxy_type = #{proxyType},remote_host = #{remoteHost},
+        remote_port = #{remotePort},remark = #{remark},update_time = #{updateTime}
+        where id = #{id}
+    </update>
+
+    <update id="delPortSetting">
+        update t_port_ban_setting
+        set is_del = 1
+        where id = #{id}
+    </update>
+
+    <update id="delPort">
+        update t_port
+        set is_del = 1
+        where id = #{portId}
+    </update>
+</mapper>

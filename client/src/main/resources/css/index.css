@@ -1,0 +1,16 @@
+.log_vbox {
+    -fx-padding: 5px;
+}
+
+.server_info_prefix_label {
+    -fx-padding: 5px;
+}
+
+.server_info_label {
+    -fx-padding: 5px;
+}
+
+.info_textarea {
+    -fx-background-color: gray;
+    -fx-text-fill: black;
+}

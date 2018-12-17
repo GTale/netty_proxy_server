@@ -1,0 +1,68 @@
+﻿<#include "/basic/_meta.html"/>
+    <title>NPS</title>
+</head>
+<body>
+<#include "/basic/_header.html"/>
+<#include "/basic/_menu.html"/>
+</div>
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont"></i> <a href="${path}/index.html" class="maincolor">首页</a>
+        <span class="c-999 en">&gt;</span>
+        <span class="c-666">我的桌面</span>
+        <a class="btn btn-primary radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <p class="f-20 text-success">欢迎使用C君的酸酸乳</p>
+            <table class="table table-border table-bordered table-bg mt-20">
+                <thead>
+                <tr>
+                    <th colspan="2" scope="col">服务器信息</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>服务器IP地址</td>
+                    <td>${serverIp!''}</td>
+                </tr>
+                <tr>
+                    <td>已用内存 </td>
+                    <td>${(usedMemory/1024/1024)?string("0.##")}MB</td>
+                </tr>
+                <tr>
+                    <td>剩余内存 </td>
+                    <td>${(usableMemory/1024/1024)?string("0.##")}MB</td>
+                </tr>
+                <tr>
+                    <td>最大内存 </td>
+                    <td>${(maxMemory/1024/1024)?string("0.##")}MB</td>
+                </tr>
+                <tr>
+                    <td>操作系统版本 </td>
+                    <td>${props['os.name']!}
+                        ${props['os.version']!}
+                    </td>
+                </tr>
+                <tr>
+                    <td>操作系统类型 </td>
+                    <td>${props['sun.arch.data.model']!}位</td>
+                </tr>
+                <tr>
+                    <td>JAVA运行环境 </td>
+                    <td>${props['java.runtime.name']!}
+                        ${props['java.runtime.version']!}
+                    </td>
+                </tr>
+                <tr>
+                    <td>JAVA虚拟机 </td>
+                    <td>${props['java.vm.name']!}
+                        ${props['java.vm.version']!}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </article>
+    </div>
+</section>
+<#include "/basic/_footer.html"/>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="210.0" prefWidth="522.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.phantom.netty.client.controller.PortController">
+    <Label layoutX="26.0" layoutY="26.0" text="端口名称:" />
+    <TextField fx:id="alias" layoutX="115.0" layoutY="22.0" prefHeight="23.0" prefWidth="382.0" />
+
+    <Label layoutX="26.0" layoutY="62.0" text="远程端口:" />
+    <TextField fx:id="remotePort" layoutX="115.0" layoutY="58.0" prefHeight="23.0" prefWidth="382.0" />
+
+    <Label layoutX="26.0" layoutY="98.0" text="本地端口:" />
+    <TextField fx:id="port" layoutX="115.0" layoutY="94.0" prefHeight="23.0" prefWidth="382.0" />
+
+    <Label layoutX="26.0" layoutY="134.0" text="备注:" />
+    <TextField fx:id="remark" layoutX="115.0" layoutY="130.0" prefHeight="23.0" prefWidth="382.0" />
+
+    <Button fx:id="save" layoutX="335.0" layoutY="167.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="74.0" text="确定" />
+    <Button fx:id="exit" layoutX="423.0" layoutY="167.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="74.0" text="取消" />
+</AnchorPane>

@@ -1,0 +1,19 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /proxy
+spring:
+  freemarker:
+    suffix: .html
+    settings:
+      auto_import: /ftl/pagination.ftl as p
+    cache: false
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite::resource:db/server.sqlite
+# 指令监听端口
+proxy:
+  port: 8000
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

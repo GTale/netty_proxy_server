@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="592.0" prefWidth="840.0" stylesheets="/css/index.css" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.phantom.netty.client.controller.IndexController">
+    <children>
+        <BorderPane layoutY="2.0" prefHeight="592" prefWidth="840" AnchorPane.bottomAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+            <!--<top>-->
+                <!--<VBox>-->
+                    <!--<children>-->
+                        <!--<MenuBar>-->
+                            <!--<menus>-->
+                                <!--<Menu fx:id="logout"/>-->
+                            <!--</menus>-->
+                        <!--</MenuBar>-->
+                    <!--</children>-->
+                <!--</VBox>-->
+            <!--</top>-->
+            <center>
+                <AnchorPane>
+                    <children>
+                        <TabPane tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0"
+                                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                 AnchorPane.topAnchor="0.0">
+                            <tabs>
+                                <Tab text="日志信息">
+                                    <content>
+                                        <VBox styleClass="log_vbox">
+                                            <children>
+                                                <ListView fx:id="logListView" VBox.vgrow="ALWAYS" styleClass="info_textarea"/>
+                                            </children>
+                                        </VBox>
+                                    </content>
+                                </Tab>
+                            </tabs>
+                        </TabPane>
+                    </children>
+                </AnchorPane>
+            </center>
+            <bottom>
+                <HBox>
+                    <children>
+                        <Label styleClass="server_info_prefix_label" text="当前服务器:"/>
+                        <Label fx:id="serverInfo" styleClass="server_info_label"/>
+                        <Label styleClass="server_info_prefix_label" text="状态:"/>
+                        <Label fx:id="serverStatus" styleClass="server_info_label" text="连接成功"/>
+                    </children>
+                </HBox>
+            </bottom>
+        </BorderPane>
+    </children>
+</AnchorPane>

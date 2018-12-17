@@ -1,0 +1,99 @@
+﻿<#include "/basic/_meta.html"/>
+<title>端口设置</title>
+</head>
+<body>
+<#include "/basic/_header.html"/>
+<#include "/basic/_menu.html"/>
+<#include "/basic/_meta.html"/>
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+        <span class="c-gray en">&gt;</span> 端口设置
+    </nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <div class="cl pd-5 bg-1 bk-gray">
+                <span class="l">
+                    <a class="btn btn-primary radius" href="javascript:;" onclick="setting_add('添加禁用规则','setting-add.html','','300')"><i class="Hui-iconfont">&#xe600;</i> 添加规则</a>
+                </span>
+                <a class="btn-refresh btn btn-primary radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
+                    <i class="Hui-iconfont">&#xe68f;</i>
+                </a>
+            </div>
+            <div class="mt-10">
+                <table class="table table-border table-bordered table-hover table-bg">
+                    <thead>
+                    <tr>
+                        <th scope="col" colspan="6">端口禁用范围</th>
+                    </tr>
+                    <tr class="text-c">
+                        <th>序号</th>
+                        <th>端口范围</th>
+                        <th>备注</th>
+                        <th>添加时间</th>
+                        <th>更新时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#list data as ps>
+                        <tr class="text-c">
+                            <td>${ps_index+1}</td>
+                            <td>${ps.startPort} - ${ps.endPort}</td>
+                            <td>${ps.remark!''}</td>
+                            <td>${ps.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                            <td>${ps.updateTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                            <td class="td-manage">
+                                <a style="text-decoration:none" class="ml-5" onclick="port_setting_edit('修改','setting/edit.html?id=${ps.id}','10001','600','270')" href="javascript:;" title="修改">
+                                    <i class="Hui-iconfont"></i>
+                                </a>
+                                <a title="删除" href="javascript:;" onclick="port_setting_del(this,${ps.id})" class="ml-5" style="text-decoration:none">
+                                    <i class="Hui-iconfont"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </#list>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+    </div>
+</section>
+<#include "/basic/_footer.html"/>
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="${path}/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+    function setting_add(title, url, w, h) {
+        layer_show(title, url, w, h);
+    }
+
+    /*修改*/
+    function port_setting_edit(title, url, id, w, h) {
+        layer_show(title, url, w, h);
+    }
+
+    /*删除*/
+    function port_setting_del(obj, id) {
+        layer.confirm('确认要删除吗？', function (index) {
+            $.ajax({
+                type: 'POST',
+                url: 'setting/del',
+                contentType: "application/json",
+                data: JSON.stringify({"id": id}),
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code === 1000) {
+                        $(obj).parents("tr").remove();
+                    }else{
+                        layer.msg(data.message, {icon: 2, time: 1000});
+                    }
+                },
+                error: function (data) {
+                    console.log(data.msg);
+                },
+            });
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite::resource:config/client.sqlite
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
