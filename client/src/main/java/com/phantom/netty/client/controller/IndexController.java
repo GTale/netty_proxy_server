@@ -137,6 +137,7 @@ public class IndexController extends BaseController implements Initializable {
                     SystemTray.getSystemTray().remove(trayIcon);
                     NioEventUtil.close();
                     Platform.exit();
+                    System.exit(0);
                     return;
                 }
 
