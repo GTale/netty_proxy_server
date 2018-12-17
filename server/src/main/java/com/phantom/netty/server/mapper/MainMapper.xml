@@ -61,7 +61,7 @@
     <select id="queryPortIsBan" resultType="java.lang.Boolean">
         select count(*) > 0
         from t_port_ban_setting
-        where start_port &lt;= #{port} and end_port &gt;= #{port}
+        where start_port &lt;= #{port} and end_port &gt;= #{port} and is_del = 0
     </select>
 
     <insert id="saveUser">
