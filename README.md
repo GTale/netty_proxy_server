@@ -1,5 +1,5 @@
 # netty_proxy_server
-基于Netty实现的内网穿透[类似与Ngrok]
+基于Netty实现的内网穿透[类似于Ngrok]
 
 使用方法：
 
@@ -29,9 +29,3 @@
     - 运行client的jar包,java -jar client.jar 输入用户名和密码
     - 网页上打开server端,配置和端口后,运行即可,如果需要使用http代理,需要设置ie的代理服务
 ```
-
-截图：
- ![image](https://github.com/GTale/netty_proxy_server/blob/master/screenshot/01.png)
- ![image](https://github.com/GTale/netty_proxy_server/blob/master/screenshot/02.png)
- ![image](https://github.com/GTale/netty_proxy_server/blob/master/screenshot/03.png)
- ![image](https://github.com/GTale/netty_proxy_server/blob/master/screenshot/NettyProxyServer.png)
