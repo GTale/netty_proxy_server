@@ -1,16 +1,28 @@
 # netty_proxy_server
-基于Netty实现的代理服务器
-
-功能：    http(s)和tcp数据的转发,实现了类似ngork的功能
-
-大概流程：一共分为3个角色,我称它为 用户、服务端[server] 和 客户端[client]
-```
-用户 ----> 服务端 -----> 服务端下发指令 ------------> 客户端  ------------>
-                                                                    访问对应的服务
-用户 <---  服务端 <----  客户端返回数据给服务端 <----- 客户端  <-----------
-```
+基于Netty实现的内网穿透[类似与Ngrok]
 
 使用方法：
+
+1、在内网电脑登录Client端
+
+2、通过在Server配置好要访问的端口
+
+3、便可以在外网电脑访问内网电脑的内部网站或内部端口。
+
+流程：
+```
+登录流程：
+内网电脑 ----> 客户端(登录、心跳包) ----> 通知服务端电脑上线
+```
+
+```
+数据转发：
+用户(外网用户)  ----> 访问特定端口 ---->服务端  ---->  传输数据   ----> 客户端  ----> 远程服务器
+
+用户(外网用户)  <---- 访问特定端口 <----服务端  <----  传输数据   <---- 客户端  <---- 远程服务器
+```
+
+打包方法：
 ```
     - 使用maven打包
     - 部署server的war包到服务器上,默认的用户名和密码是 admin/123
@@ -22,3 +34,4 @@
  ![image](https://github.com/GTale/netty_proxy_server/blob/master/screenshot/01.png)
  ![image](https://github.com/GTale/netty_proxy_server/blob/master/screenshot/02.png)
  ![image](https://github.com/GTale/netty_proxy_server/blob/master/screenshot/03.png)
+ ![image](https://github.com/GTale/netty_proxy_server/blob/master/screenshot/NettyProxyServer.png)

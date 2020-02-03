@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author: phantom
  * @Date: 2018/12/6 09:47
- * @Description:
+ * @Description: 实现ApplicationRunner接口，随程序自动启动
  */
 @Component
 public class BootServer implements ApplicationRunner {

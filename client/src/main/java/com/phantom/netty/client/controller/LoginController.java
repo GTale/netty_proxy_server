@@ -104,7 +104,7 @@ public class LoginController implements Initializable {
             ProgressFrom progress = new ProgressFrom(new Task<Object>() {
                 @Override
                 protected Object call() throws Exception {
-                    // 访问远程服务器
+                    // 访问远程服务器,进行登录工作
                     if (bootstrap == null) {
                         bootstrap = NioClient.getBootstrap(config.getServerUrl(), config.getPort());
                     }

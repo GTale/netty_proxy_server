@@ -78,7 +78,7 @@ public class NettyServer {
 
                             @Override
                             public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                                log.info("有远程客户端连接：{}", port);
+                                log.info("有客户端连接：{}", port);
 
                                 // 发送消息到客户端
                                 t = new Thread(() -> {

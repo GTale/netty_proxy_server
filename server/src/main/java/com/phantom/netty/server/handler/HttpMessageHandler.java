@@ -15,6 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Author phantom
+ * @Date
+ * @Description 接受来自远程服务器的消息
+ * */
 @Slf4j
 public class HttpMessageHandler extends ChannelInboundHandlerAdapter {
 
@@ -28,7 +33,7 @@ public class HttpMessageHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        // 处理传递过来的http请求
+        // 处理传递过来的http请求,判断当前消息是否有分片
         if (msg instanceof FullHttpRequest) {
             FullHttpRequest request = (FullHttpRequest) msg;
             // 判断当前连接是否已经完成,存储,volatile不能保证原子性，需要加锁
@@ -41,7 +46,7 @@ public class HttpMessageHandler extends ChannelInboundHandlerAdapter {
             //处理http消息
             messageHandle(ctx, request);
         } else {
-            // 直接下发消息
+            // 分片消息
             String                  sequenceId = ctx.channel().id().asShortText();
             DispatcherRequestPacket packet     = new DispatcherRequestPacket();
             packet.setSequenceId(sequenceId);

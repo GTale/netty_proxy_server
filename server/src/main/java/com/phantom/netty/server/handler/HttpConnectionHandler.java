@@ -25,7 +25,7 @@ public class HttpConnectionHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         // 判断消息的类型
-        Channel channel         = ctx.channel();
+        Channel channel = ctx.channel();
         boolean isConnectMethod = false;
 
         // 获取channel

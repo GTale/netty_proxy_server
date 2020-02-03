@@ -29,7 +29,7 @@ import java.util.Optional;
 /**
  * @author: phantom
  * @Date: 2018/11/30 08:57
- * @Description:
+ * @Description: 接受服务器发送过来的指定和数据，
  */
 @Slf4j
 public class DispatcherRequestHandler extends SimpleChannelInboundHandler<DispatcherRequestPacket> {
@@ -73,7 +73,10 @@ public class DispatcherRequestHandler extends SimpleChannelInboundHandler<Dispat
     }
 
     /**
-     * 处理连接事件
+     * 处理连接事件。
+     * 一个两个情况：
+     * 1)如果是普通的http或者tcp的连接，通过Client与指定服务建立连接后，只需要发送一个应答包给Server就行了。
+     * 2)如果是Tunnel(一般是https)的情况,通过Client与指定服务建立连接后，还需要在应答包里面添加一个普通的200响应包，表示我们是作为转发。
      */
     private void handleConnections(ChannelHandlerContext ctx, DispatcherRequestPacket packet) {
 
@@ -91,7 +94,7 @@ public class DispatcherRequestHandler extends SimpleChannelInboundHandler<Dispat
                 channel.attr(Attributes.PROXY_TYPE).set(proxyType);
                 ClientSessionUtil.bindSocketChannel(sequence, channel);
 
-                // 判断当前的连接类型是否是connect连接
+                // 判断当前的连接类型是否是https的连接
                 if (Objects.equals(proxyType, CommonType.ProxyType.TUNNEL)) {
                     // 简单的回响给用户,表示当前只做转发
                     HttpVersion      version  = HttpVersion.valueOf((String) packet.getMsg());
@@ -115,7 +118,7 @@ public class DispatcherRequestHandler extends SimpleChannelInboundHandler<Dispat
                         ClientSessionUtil.getChannel().writeAndFlush(buildPacket);
                     });
                 } else {
-                    // 通知服务器,通过已经建立完毕,可以继续下发指令
+                    // http与tcp的连接建立成功后,直接通知服务器,通过已经建立完毕,可以继续下发指令
                     ChannelBuildResponsePacket buildPacket = new ChannelBuildResponsePacket();
                     buildPacket.setSequenceId(sequence);
                     buildPacket.setProxyType(proxyType);
